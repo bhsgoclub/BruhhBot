@@ -98,10 +98,7 @@ local function run(msg, matches)
     local text = tostring(_config.help_text_flood)
     return text
   else 
-    local text = plugin_help(matches[1])
-    if not text then
-      text = telegram_help()
-    end
+    local text = tostring(_config.help_text_plugins)
     return text
   end
 end
