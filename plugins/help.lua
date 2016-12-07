@@ -43,7 +43,7 @@ local function help_all()
 end
 
 local function run(msg, matches)
-  if matches[1] == "!help" then
+  if matches[1] == "!help plugins" then
     local text = tostring(_config.help_text_plugins)
     return telegram_help()
   elseif matches[1] == "!help all" then
@@ -96,9 +96,6 @@ local function run(msg, matches)
     return text
   elseif matches[1] == "!help flood" then
     local text = tostring(_config.help_text_flood)
-    return text
-  else 
-    local text = tostring(_config.help_text_plugins)
     return text
   end
 end
