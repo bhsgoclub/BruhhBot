@@ -27,11 +27,10 @@ end
 
 -- !help command
 local function telegram_help()
-  local text = "Plugin list: \n\n"
   -- Plugins names
-  for name in pairs(plugins) do
-    text = text..name..'\n'
-  end
+    local text = tostring(_config.help_text_plugins)
+    text = text
+
   text = text..'\n'..'Write "!help [plugin name]" for more info.'
   text = text..'\n'..'Or "!help all" to show all info.'
   return text
@@ -39,11 +38,8 @@ end
 
 -- !help all command
 local function help_all()
-  local ret = ""
-  for name in pairs(plugins) do
-    ret = ret .. plugin_help(name)
-  end
-  return ret
+    local text = tostring(_config.help_text_alldashit)
+    return text
 end
 
 local function run(msg, matches)

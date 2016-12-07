@@ -1977,7 +1977,10 @@ local function run(msg, matches)
 		elseif matches[1] == 'help' and is_owner(msg) then
 			local name_log = user_print_name(msg.from)
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] Used /superhelp")
-			return super_help()
+			local text = tostring(_config.help_text_plugins)
+			text = text..'\n'..'Write "!help [plugin name]" for more info.'
+			text = text..'\n'..'Or "!help all" to show all info.'
+			return text
 		end
 
 		if matches[1] == 'peer_id' and is_admin1(msg)then
