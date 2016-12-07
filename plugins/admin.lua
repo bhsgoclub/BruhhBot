@@ -305,6 +305,7 @@ local function pre_process(msg)
 end
 
 return {
+  description = "Commands only to be used by Admin",
   patterns = {
 	"^[#!/](pm) (%d+) (.*)$",
 	"^[#!/](import) (.*)$",

@@ -1666,6 +1666,10 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked arabic ")
 				return lock_group_arabic(msg, data, target)
 			end
+			if matches[2] == 'Arabic' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked arabic ")
+				return lock_group_arabic(msg, data, target)
+			end
 			if matches[2] == 'member' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked member ")
 				return lock_group_membermod(msg, data, target)
@@ -1707,6 +1711,10 @@ local function run(msg, matches)
 				return unlock_group_flood(msg, data, target)
 			end
 			if matches[2] == 'arabic' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked Arabic")
+				return unlock_group_arabic(msg, data, target)
+			end
+			if matches[2] == 'Arabic' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked Arabic")
 				return unlock_group_arabic(msg, data, target)
 			end
@@ -1964,7 +1972,7 @@ local function run(msg, matches)
 		end
 
 		if matches[1] == 'help' and not is_owner(msg) then
-			text = "Message /superhelp to @Teleseed in private for SuperGroup help"
+			text = "Message /superhelp to @BruhhBot in private for SuperGroup help"
 			reply_msg(msg.id, text, ok_cb, false)
 		elseif matches[1] == 'help' and is_owner(msg) then
 			local name_log = user_print_name(msg.from)

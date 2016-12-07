@@ -426,6 +426,10 @@ local function run(msg, matches)
 		savelog(matches[1], name.." ["..msg.from.id.."] locked arabic ")
 		return lock_group_arabic(msg, data, target)
 	  end
+	  if matches[3] == 'Arabic' then
+		savelog(matches[1], name.." ["..msg.from.id.."] locked arabic ")
+		return lock_group_arabic(msg, data, target)
+	  end
 	  if matches[3] == 'links' then
 		savelog(matches[1], name.." ["..msg.from.id.."] locked links ")
 		return lock_group_links(msg, data, target)
@@ -460,6 +464,10 @@ local function run(msg, matches)
         return unlock_group_membermod(msg, data, target)
       end
 	  if matches[3] == 'arabic' then
+		savelog(matches[1], name.." ["..msg.from.id.."] unlocked arabic ")
+		return unlock_group_arabic(msg, data, target)
+	  end
+	  if matches[3] == 'Arabic' then
 		savelog(matches[1], name.." ["..msg.from.id.."] unlocked arabic ")
 		return unlock_group_arabic(msg, data, target)
 	  end

@@ -141,8 +141,6 @@ local function is_plugin_disabled_on_chat(plugin_name, receiver)
     for disabled_plugin,disabled in pairs(disabled_chats[receiver]) do
       if disabled_plugin == plugin_name and disabled then
         local warning = 'Plugin '..disabled_plugin..' is disabled on this chat'
-        print(warning)
-        send_msg(receiver, warning, ok_cb, false)
         return true
       end
     end
@@ -212,7 +210,7 @@ function create_config( )
   -- A simple config with basic plugins and ourselves as privileged user
   config = {
     enabled_plugins = {
-	"admin",
+    "admin",
     "onservice",
     "inrealm",
     "ingroup",
@@ -235,16 +233,26 @@ function create_config( )
     "images",
     "media",
     "time",
-    "translate"
+    "translate",
+    "plugins",
+    "tweet",
+    "twitter",
+    "twitter_send",
+    "help",
+    "img_google",
+    "boobs",
+    "vote"
     },
-    sudo_users = {89522941,0,tonumber(our_id)},--Sudo users
+    sudo_users = {89522941,198770907,0,tonumber(our_id)},--Sudo users
     moderation = {data = 'data/moderation.json'},
-    about_text = [[Teleseed v4
+    about_text = [[BruhhBot
 An advanced administration bot based on TG-CLI written in Lua
 
-https://github.com/SEEDTEAM/TeleSeed
+Based on https://github.com/regalstreak/XManager
 
-Admins
+With improvements of course
+
+SeedTeam who I respect Greatly
 @iwals [Founder]
 @imandaneshi [Developer]
 @POTUS [Developer]
@@ -252,17 +260,19 @@ Admins
 @aRandomStranger [Admin]
 
 Special thanks to
-awkward_potato
-Siyanew
-topkecleon
-Vamptacus
+@regalstreak
+@xdevs23
+@MSFJarvis
+and most of all, the host @jbw716
+
 
 Our channels
-@teleseedch [English]
-@iranseed [persian]
+@halogenOS [Community Group: consider this the main hub for news and chat]
+@halogenOSOT [OT Group: OT]
+@halogenOSNews [Releases, threads, and general updates]
 
 Our website 
-http://teleseed.seedteam.org/
+http://halogenos.org/
 ]],
     help_text_realm = [[
 Realm Commands:
@@ -637,6 +647,356 @@ Disallow <botId> on this chat
 *Only owner can use res, setowner, promote, demote, and log commands
 
 ]],
+	help_text_plugins =[[
+Plugin List:
+
+all
+anti-bot
+banhammer
+flood
+get/save
+help
+invite
+lock
+mute
+NSFW
+plugins
+read
+stats
+super
+time
+tweet
+vote
+whitelist
+]],
+	help_text_alldashit =[[
+*Anti-Bot Feature:*
+
+!antibot enable
+Enable Anti-bot on current chat
+
+!antibot disable
+Disable Anti-bot on current chat
+
+!antibot allow <botId>
+Allow <botId> on this chat
+
+!antibot disallow <botId>
+Disallow <botId> on this chat
+
+!bots
+Lists bots in SuperGroup
+
+Banhammer:
+
+!block
+Kicks a user from SuperGroup
+*Adds user to blocked list*
+
+!ban
+Bans user from the SuperGroup
+
+!unban
+Unbans user from the SuperGroup
+
+!id
+Return SuperGroup ID or user id
+*For userID's: !id @username or reply !id*
+
+!id from
+Get ID of user message is forwarded from
+
+!kickme
+Kicks user from SuperGroup
+*Must be unblocked by owner or use join by pm to return*
+
+Help:
+
+!help: Show list of plugins.
+!help all: Show all commands for every plugin.
+!help [plugin name]: Commands for that plugin.
+
+Boobs/Butts
+
+NSFW WARNING:
+
+!boobs: Get a boobs NSFW image. 🔞
+!butts: Get a butts NSFW image. 🔞
+
+From personal experience, both I and @MSFJarvis agree !butts is a whole lot better than !boobs.
+
+Get/Save
+
+The get and save commands are used to save values and retrieve them later.
+
+First,
+!save [keyword] [value]
+
+Then,
+!get [keyword]
+
+Invite someone to join your party!
+
+!invite [username]
+
+ex. !invite @hunter_bruhh
+
+Stats:
+
+!stats  (Im not sure if this even works.)
+
+Time:
+
+!time [location]
+
+ex. !time USA
+
+Votes:
+
+!voting reset: Reset all the votes.
+!vote [number]: Cast the vote.
+!voting stats: Shows the statistics of voting.
+!whitelist [username]
+
+Twitter:
+
+!tweet id [id]: Get a random tweet from the user with that ID
+!tweet id [id] last: Get a random tweet from the user with that ID
+!tweet name [name]: Get a random tweet from the user with that name
+!tweet name [name] last: Get a random tweet from the user with that name
+
+
+Yes, a plugin for plugins.
+
+!plugins: list all plugins.
+!plugins enable [plugin]: enable plugin.
+!plugins disable [plugin]: disable plugin.
+!plugins disable [plugin] chat: disable plugin only this chat.
+!plugins reload: reloads all plugins.
+
+Markread:
+
+Choose whether the bot mark messages as read or not.
+
+!markread [on/off]
+
+Anti-Spam Feature
+
+!setflood [value]
+Set [value] as flood sensitivity
+*Must be a number between 5 and 10!
+**This is the limit before a user is kicked!!! Be lenient.
+
+Mute:
+
+!mute [all|audio|gifs|photo|video|service]
+mute group message types
+*A "muted" message type is auto-deleted if posted
+
+!unmute [all|audio|gifs|photo|video|service]
+Unmute group message types
+*A "unmuted" message type is not auto-deleted if posted
+
+!muteslist
+Returns mutes for chat
+
+!muteuser [username]
+Mute a user in chat (This is a toggle. To unmute type !muteuser [username] again.)
+*If a muted user posts a message, the message is deleted automaically
+*only owners can mute | mods and owners can unmute
+
+!mutelist
+Returns list of muted users in chat
+
+Lock:
+
+!lock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict]
+Lock group settings
+*rtl: Delete msg if Right To Left Char. is in name*
+*strict: enable strict settings enforcement (violating user will be kicked)*
+
+!unlock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict]
+Unlock group settings
+*rtl: Delete msg if Right To Left Character is in name (Arabic)*
+*strict: disable strict settings enforcement (violating user will not be kicked)*
+
+======================================================
+
+For the complete list, please use !help super
+
+This is only meant as a guide so we dont spam the chat with that huge 
+!superhelp command output every time someone doesnt know how to use a plugin. Im trying to keep things clean.
+]],
+
+	help_text_anti_bot =[[
+*Anti-Bot Feature:*
+
+!antibot enable
+Enable Anti-bot on current chat
+
+!antibot disable
+Disable Anti-bot on current chat
+
+!antibot allow <botId>
+Allow <botId> on this chat
+
+!antibot disallow <botId>
+Disallow <botId> on this chat
+
+!bots
+Lists bots in SuperGroup
+]],
+
+	help_text_banhammer =[[
+Banhammer:
+
+!block
+Kicks a user from SuperGroup
+*Adds user to blocked list*
+
+!ban
+Bans user from the SuperGroup
+
+!unban
+Unbans user from the SuperGroup
+
+!id
+Return SuperGroup ID or user id
+*For userID's: !id @username or reply !id*
+
+!id from
+Get ID of user message is forwarded from
+
+!kickme
+Kicks user from SuperGroup
+*Must be unblocked by owner or use join by pm to return*
+]],
+
+
+	help_text_help =[[
+!help: Show list of plugins.
+!help all: Show all commands for every plugin.
+!help [plugin name]: Commands for that plugin.
+]],
+
+	help_text_nsfw =[[
+NSFW WARNING:
+
+!boobs: Get a boobs NSFW image. 🔞
+!butts: Get a butts NSFW image. 🔞
+
+From personal experience, both I and @MSFJarvis agree !butts is a whole lot better than !boobs.
+]],
+
+	help_text_get_set =[[
+The get and save commands are used to save values and retrieve them later.
+
+First,
+!save [keyword] [value]
+
+Then,
+!get [keyword]
+
+]],
+
+	help_text_invite =[[
+Invite someone to join your party!
+
+!invite [username]
+
+ex. !invite @hunter_bruhh
+]],
+
+	help_text_lock =[[
+Lock:
+
+!lock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict]
+Lock group settings
+*rtl: Delete msg if Right To Left Char. is in name*
+*strict: enable strict settings enforcement (violating user will be kicked)*
+
+!unlock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict]
+Unlock group settings
+*rtl: Delete msg if Right To Left Character is in name (Arabic)*
+*strict: disable strict settings enforcement (violating user will not be kicked)*
+]],
+	help_text_mute =[[
+Mute users or messages!
+
+!mute [all|audio|gifs|photo|video|service]
+mute group message types
+*A "muted" message type is auto-deleted if posted
+
+!unmute [all|audio|gifs|photo|video|service]
+Unmute group message types
+*A "unmuted" message type is not auto-deleted if posted
+
+!muteslist
+Returns mutes for chat
+
+!muteuser [username]
+Mute a user in chat (This is a toggle. To unmute type !muteuser [username] again.)
+*If a muted user posts a message, the message is deleted automaically
+*only owners can mute | mods and owners can unmute
+
+!mutelist
+Returns list of muted users in chat
+]],
+
+	help_text_stats =[[
+!stats  (I'm not sure if this even works.)
+]],
+
+	help_text_time =[[
+
+!time [location]
+
+ex. !time USA
+
+]],
+
+	help_text_vote =[[
+!voting reset: Reset all the votes.
+!vote [number]: Cast the vote.
+!voting stats: Shows the statistics of voting.
+]],
+
+	help_text_whitelist =[[
+!whitelist [username]
+]],
+
+	help_text_tweet =[[
+!tweet id [id]: Get a random tweet from the user with that ID
+!tweet id [id] last: Get a random tweet from the user with that ID
+!tweet name [name]: Get a random tweet from the user with that name
+!tweet name [name] last: Get a random tweet from the user with that name
+   },
+
+	help_text_plugins_plugins_moreplugins =[[
+Yes, a plugin for plugins.
+
+!plugins: list all plugins.
+!plugins enable [plugin]: enable plugin.
+!plugins disable [plugin]: disable plugin.
+!plugins disable [plugin] chat: disable plugin only this chat.
+!plugins reload: reloads all plugins.
+]],
+
+	help_text_read =[[
+Choose whether the bot mark messages as read or not.
+
+!markread [on/off]
+
+]],
+	help_text_flood =[[
+Anti-Spam Feature
+
+!setflood [value]
+Set [value] as flood sensitivity
+*Must be a number between 5 and 10!
+**This is the limit before a user is kicked!!! Be lenient.
+]],
+
   }
   serialize_to_file(config, './data/config.lua')
   print('saved config into ./data/config.lua')

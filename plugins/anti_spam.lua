@@ -161,6 +161,9 @@ local function cron()
 end
 
 return {
+  usage = {
+    "[#!/]setflood: [Number before banhammer]"
+  },
   patterns = {},
   cron = cron,
   pre_process = pre_process
