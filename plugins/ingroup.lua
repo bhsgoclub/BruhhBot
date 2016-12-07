@@ -1688,7 +1688,6 @@ if msg.to.type == 'chat' then
         return
       end
       savelog(msg.to.id, name_log.." ["..msg.from.id.."] Used /help")
-      return help()
     end
     if matches[1] == 'res' then 
       local cbres_extra = {
