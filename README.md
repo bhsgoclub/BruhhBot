@@ -1,7 +1,7 @@
-# [XManager](https://telegram.me/XManager)
+# [BruhhBot](https://telegram.me/BruhhBot)
 
 
-**An advanced and powerful administration bot based on [yagop/telegram-bot](https://github.com/yagop/telegram-bot) licensed under the [GNU General Public License](https://github.com/SEEDTEAM/XManager/blob/master/LICENSE)**.
+**An advanced and powerful administration bot based on [yagop/telegram-bot](https://github.com/yagop/telegram-bot) licensed under the [GNU General Public License](https://github.com/hbashton/BruhhBot/blob/master/LICENSE)**.
 # Features
 
 * **A powerful antispam system with custom sensitivity for each group**
@@ -25,14 +25,13 @@
 * * *
 
 ## Commands
-XManager has several commands that are only usable at certain ranks.
+BruhhBot has several commands that are only usable at certain ranks.
 
 
 ## General Commands
 | Command | Description |
 |:--------|:------------|
 | [#!/]id | Returns group/SuperGroup ID or user id in pm. |
-| [#!/]XManager | Returns bot information. |
 | [#!/]time [area] | Displays the local time in that area. |
 | [#!/]translate [text] | Translate the text to English. |
 
@@ -168,7 +167,7 @@ XManager has several commands that are only usable at certain ranks.
 |:--------|:--------|:-------------|---------|
 | [#!/]addadmin [id<html>&#124;</html>username] | Set a user as bot admin. | Y | Y | Y |
 | [#!/]removeadmin [id<html>&#124;</html>username] | Remove a user from bot admin. | Y | Y | Y |
-| [#!/]sync_gbans | Sync your GBans with official @XManager | Y | Y | Y |
+| [#!/]sync_gbans | Sync your GBans with official @BruhhBot | Y | Y | Y |
 
 
 ## Settings 
@@ -238,17 +237,26 @@ sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-d
 
 # Let's install the bot.
 cd $HOME
-git clone https://github.com/SEEDTEAM/XManager.git -b supergroups
-cd XManager
+git clone https://github.com/hbashton/BruhhBot.git -b supergroups
+cd BruhhBot
 chmod +x launch.sh
 ./launch.sh install
 ./launch.sh # Enter a phone number & confirmation code.
+type 'quit' to get out of launch.sh
+
+# Commands to start the bot in foreground and background
+for TESTING: ./launch.sh
+for a STABLE BOT:
+	foreground: sudo ./steady.sh -t
+	background: sudo ./steady.sh -T
+
+only use ./launch.sh to setup the bot. Otherwise, you will have telegram memory leaks and your bot will crash
 ```
 ### One command
 To install everything in one command (useful for VPS deployment) on Debian-based distros, use:
 ```sh
 #https://github.com/yagop/telegram-bot/wiki/Installation
-sudo apt-get update; sudo apt-get upgrade -y --force-yes; sudo apt-get dist-upgrade -y --force-yes; sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev lua-socket lua-sec lua-expat libevent-dev libjansson* libpython-dev make unzip git redis-server g++ autoconf -y --force-yes && git clone https://github.com/SEEDTEAM/XManager.git -b supergroups && cd XManager && chmod +x launch.sh && ./launch.sh install && ./launch.sh
+sudo apt-get update; sudo apt-get upgrade -y --force-yes; sudo apt-get dist-upgrade -y --force-yes; sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev lua-socket lua-sec lua-expat libevent-dev libjansson* libpython-dev make unzip git redis-server g++ autoconf -y --force-yes && git clone https://github.com/hbashton/BruhhBot.git -b supergroups && cd BruhhBot && chmod +x launch.sh && ./launch.sh install && ./launch.sh
 ```
 
 * * *
@@ -286,7 +294,8 @@ Create a realm using the `!createrealm` command.
 Check out this [tutorial by Telegram Geeks](http://telegramgeeks.com/2016/01/TeleSeed-tutorial/) for further assistance with setup and installation.
 
 **Do not contact us** in private for support.
-Join our bot development group by sending `/join 1047524697` to [@TeleSeed](https://telegram.me/TeleSeed)
+
+Email me at xosdeveloperbruhh@gmail.com for support using this bot
 
 # Special thanks to
 
@@ -309,3 +318,13 @@ For graphic designs.
 [Siyanew](https://github.com/Siyanew) ([Telegram](https://telegram.me/Siyanew))
 
 [Rondoozle](https://github.com/Rondoozle) ([Telegram](https://telegram.me/POTUS))
+
+# halogenOS team!
+
+[hunter_bruhh](https://github.com/hbashton) ([Telegram](https://telegram.me/hunter_bruhh))
+
+[xdevs23](https://github.com/xdevs23) ([Telegram](https://telegram.me/xdevs23))
+
+[MSFJarvis](https://github.com/MSF-Jarvis) ([Telegram](https://telegram.me/MSF_Jarvis))
+
+[regalstreak](https://github.com/regalstreak) ([Telegram](https://telegram.me/regalstreak))
