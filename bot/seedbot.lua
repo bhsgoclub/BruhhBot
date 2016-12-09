@@ -241,7 +241,8 @@ function create_config( )
     "help",
     "img_google",
     "boobs",
-    "vote"
+    "vote",
+    "pirate"
     },
     sudo_users = {89522941,198770907,0,tonumber(our_id)},--Sudo users
     moderation = {data = 'data/moderation.json'},

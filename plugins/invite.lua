@@ -18,7 +18,7 @@ end
 function run(msg, matches)
   local data = load_data(_config.moderation.data)
   if not is_momod(msg) then
-	return
+	return 'Only admins can invite.'
   end
   if not is_admin1(msg) then -- For admins only !
 		return 'Only admins can invite.'
